@@ -29,7 +29,7 @@ namespace ValueSeperator
             _shader.SetFloat("MinValue", 1-maxValue);
             _shader.SetFloat("MaxValue", 1-minValue);
             _shader.SetFloat("OpacityMultiplier", opacityMultiplier);
-            _shader.SetTexture(_kernel, "Texture", rt);
+            _shader.SetTexture(_kernel, "Tex", rt);
 
             _shader.Dispatch(_kernel, width/8, height/8, 1);
 
