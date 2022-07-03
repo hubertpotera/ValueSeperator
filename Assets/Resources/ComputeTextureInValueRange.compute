@@ -1,0 +1,21 @@
+#pragma kernel CSMain
+
+float MinValue;
+float MaxValue;
+float OpacityMultiplier;
+RWTexture2D<float4> Texture;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    float4 colour = Texture[id.xy];
+    float value = max(colour.r, max(colour.g, colour.b));
+
+    if(value >= MinValue && value <= MaxValue)
+    {
+        return;
+        Texture[id.xy] = float4(value,value,value,1);
+    }
+
+    Texture[id.xy]= float4(colour.rgb, OpacityMultiplier*MinValue);
+}
