@@ -9,7 +9,7 @@ RWTexture2D<float4> Tex;
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
     float4 colour = Tex[id.xy];
-    float value = max(colour.r, max(colour.g, colour.b));
+    float value = (colour.r + colour.g + colour.b) * 0.3333f;
 
     if(value >= MinValue && value <= MaxValue)
     {
