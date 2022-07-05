@@ -50,6 +50,7 @@ namespace ValueSeperator
             _texture = tex;
             _width = tex.width;
             _height = tex.height;
+            MainImage.texture = _texture;
             UpdateImages();
         } 
 
@@ -115,7 +116,10 @@ namespace ValueSeperator
             }
             Backgrounds[Backgrounds.Length-1].rectTransform.sizeDelta = 2*sizeDelta;
 
-            MainImage.texture = _texture;
+            Texture2D.Destroy(LowValueImage.texture);
+            Texture2D.Destroy(MidValueImage.texture);
+            Texture2D.Destroy(HighValueImage.texture);
+            Texture2D.Destroy(ZoomedImage.texture);
             LowValueImage.texture = ComputeTextureInValueRange.Compute(_texture, 0f, _lowerValue, _opacityMultiplier);
             MidValueImage.texture = ComputeTextureInValueRange.Compute(_texture, _lowerValue, _higherValue, _opacityMultiplier);
             HighValueImage.texture = ComputeTextureInValueRange.Compute(_texture, _higherValue, 1f, _opacityMultiplier);

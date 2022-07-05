@@ -21,7 +21,7 @@ namespace ValueSeperator
             int width = tex2D.width;
             int height = tex2D.height;
 
-            RenderTexture rt = new RenderTexture(width, height, 0);
+            RenderTexture rt = RenderTexture.GetTemporary(width, height, 0);
             rt.enableRandomWrite = true;
             RenderTexture.active = rt;
             Graphics.Blit(tex2D, rt);
@@ -37,6 +37,8 @@ namespace ValueSeperator
             RenderTexture.active = rt;
             result.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             result.Apply();
+
+            RenderTexture.ReleaseTemporary(rt);
 
             return result;
         }
